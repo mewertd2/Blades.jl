@@ -114,7 +114,7 @@ Where `u` is restricted to be 1-vector, due to non-commutativity/associativity o
 
 The geometric product, addition and other operators on blades are better defined in a more general manner once we have Types for k-vectors and multivectors defined.
 
-These Types and operators are defined in the [KVectors](../KVectors.jl) and [Multivectors](../Multivectors.jl) packages.  
+These Types and operators are defined in the [KVectors](https://github.com/mewertd2/KVectors.jl) and [Multivectors](https://github.com/mewertd2/Multivectors.jl) packages.  
 
 If we wished to we could define only addition of Blades with zero to complete our algebra of simple k-vectors ( blades ).  
 
@@ -181,8 +181,8 @@ To enter these sybols into the Julia REPL or a Julia enabled editor.
 ## K-Vectors and Multivectors
 
 Simple blades alone are not terribly useful.  For applications in geometry and simulation you will want to use packages built on Blades.
-* [KVectors](../KVectors.jl) 
-* [Multivectors](../Multivectors.jl)
+* [KVectors](https://github.com/mewertd2/KVectors.jl) 
+* [Multivectors](https://github.com/mewertd2/Multivectors.jl)
 
 ## Project Information
 
