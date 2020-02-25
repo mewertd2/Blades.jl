@@ -12,7 +12,5 @@ matrix:
 notifications:
   email: false
 after_success:
-  # push coverage results to Coveralls
-  - julia -e 'using Pkg; cd(Pkg.dir("Blades")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
   # push coverage results to Codecov
   - julia -e 'using Pkg; cd(Pkg.dir("Blades")); using Coverage; Codecov.submit(process_folder())'
