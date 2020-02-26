@@ -107,6 +107,17 @@ Base.:(+)(s::T, a::B) where {B<:Blade,T<:Real} = a + s
   @test 1.0∧a == a
   @test 1.0⋅a == a
 
+  @test norm(b) == 2.0 == det(b)
+  @test norm(normalize(b)) == 1.0
+  @test Blades.norm_sqr(b) == 4.0 == det(b,b)
+  @test conj(a*b) == b*a == reverse(a*b) == ~(a*b)
+
+  @test factor(a*b) == (scalar(a)*scalar(b), e₁, e₂)
+
+  @test basis_1blades(e₁) == basis_kblades(e₁, 1)
+  @test length(basis_kblades(e₂₃, 2)) == 6
+  @test length(basis_kblades(e₂₃, 3)) == length(basis_kblades(e₂₃, 1))
+
   g₁, g₂, g₃, g₄, g₁₂, g₁₃, g₁₄, g₂₃, g₂₄, g₃₄, g₁₂₃, g₁₂₄, g₁₃₄, g₂₃₄, g₁₂₃₄ = alle(g4,4)
 
   @test dual(dual(1g₁)) == ⟂(⟂(1g₁))
@@ -142,6 +153,9 @@ end
   @test ⋆(2.0e₁₂) == -2.0
   ot = 2.0e₁₂
   @test ot∧⋆(ot) == (ot⋅ot)pseudoscalar(ot)
+
+  @test raise(e₁) == alld(g2,2)[1]
+  @test lower(raise(e₁₂)) == e₁₂
 end
 
 #==

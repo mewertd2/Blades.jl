@@ -723,7 +723,7 @@ lower( k::K ) where {K<:Blade} = lower(K)(k.x)
 
 direct map taking all lower indices ( standard basis ) to upper indices ( dual basis )
 e.g. raise(1e¹²₃) == 1e¹²³
-assumes you have generated a dual basis, i.e. @generate_basis("...", true)
+assumes you have generated a dual basis, i.e. @generate_basis("...", _, true)
 """
 @generated function raise( k::Type{K} ) where {K<:Blade}
   ns = parentmodule(K)
@@ -879,6 +879,13 @@ norm_sqr(b::K) where {K<:Blade} = magnitude(b)*magnitude(b)
 norm(b::K) where {K<:Blade} = abs(magnitude(b))
 normalize(b::K) where {T, K<:Blade{T}} = one(T)∧untype(b)
 
+"""
+    basis_kblades(k, n)
+
+a list of all basis blades of degree n for the algebra k belongs to.
+
+i.e. basis_kblades(e₁, 2) will depend the dimension of the algebra e₁ was generated in
+"""
 @generated function basis_kblades(k, d::Val{N}) where N 
   ns = parentmodule(k)
   n = grade((FunctionWrapper{Any,
@@ -888,10 +895,24 @@ normalize(b::K) where {T, K<:Blade{T}} = one(T)∧untype(b)
   :($b)
 end
 
+basis_kblades(k::Type{K}, d::Val{N}) where {N,K} = basis_kblades(k(1), d)
 basis_kblades(u,k::Int) = basis_kblades(u,Val(k))
 
-basis_1blades( k::B ) where {B<:Blade} = basis_kblades(k,1)
+"""
+    basis_kblades(k)
 
+a list of all basis 1-blades for the algebra k belongs to.
+
+i.e. basis_1blades(e₁) will depend the dimension of the algebra e₁ was generated in
+"""
+basis_1blades( k::B ) where {B<:Blade} = basis_kblades(k,1)
+basis_1blades( k::Type{B} ) where {B<:Blade} = basis_kblades(k,1)
+
+"""
+    factor(b)
+
+all the smallest factors, that when wedged together create b.
+"""
 @generated function factor(b::B) where {B<:Blade}
   bs = subspace(b)
 
