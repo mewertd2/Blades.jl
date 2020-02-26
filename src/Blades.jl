@@ -884,20 +884,20 @@ a list of all basis blades of degree n for the algebra k belongs to.
 
 i.e. basis_kblades(e₁, 2) will depend the dimension of the algebra e₁ was generated in
 """
-@generated function basis_kblades(k, d::Val{N}) where N 
-  ns = parentmodule(k)
+@generated function basis_kblades(::Type{K}, d::Val{N}) where {N,K} 
+  ns = parentmodule(K)
   n = grade((FunctionWrapper{Any,
-                             Tuple{Type{k},}}(pseudoscalar))(k))
+                             Tuple{Type{K},}}(pseudoscalar))(K))
   kone = alle(ns,n)[1:n]
   b = filter(e->grade(e)==N, alle(ns, n))
   :($b)
 end
 
-basis_kblades(k::Type{K}, d::Val{N}) where {N,K} = basis_kblades(k(1), d)
+basis_kblades(k::K, d::Val{N}) where {N,K} = basis_kblades(K, d)
 basis_kblades(u,k::Int) = basis_kblades(u,Val(k))
 
 """
-    basis_kblades(k)
+    basis_1blades(k)
 
 a list of all basis 1-blades for the algebra k belongs to.
 
