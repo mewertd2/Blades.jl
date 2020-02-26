@@ -136,8 +136,6 @@ julia> dist(1.0,-1.0).df(1)
 
 julia> dist(1.0,-1.0).f()
 1.4142135623730951
-
-
 """
 struct ZForm{D} <: Number  # calling a form a number is a stretch, but it works nicely inside a blade
   f # ::Function
