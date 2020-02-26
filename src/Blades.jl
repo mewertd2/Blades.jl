@@ -818,23 +818,24 @@ det( a::B ) where { B<:Blade } = (a⋅a)/magnitude(a)
 The metric scalar product between two Blades of same grade.  
 As defined in Geometric Algebra for Computer Science.
 """
-function det( a::A, b::B ) where { T, N, A<:Blade{T,N}, B<:Blade{T,N} }
+@generated function det( a::A, b::B ) where { T, N, A<:Blade{T,N}, B<:Blade{T,N} }
   ea = basis_kblades(a,1)
   eb = basis_kblades(b,1)
 
   sa = subspace(a)
   sb = subspace(b)
-  n = length(sa)
-  if n != length(sb)
-    zero(T)
-  else
-    aᵢ = one(T).*ea[sa]
-    bⱼ = one(T).*eb[sb]
-    gramdet = det(aᵢ .⋅ reverse(bⱼ)')
-    scalar(a)*scalar(b)*gramdet
-  end
+  #==
+  aᵢ = one(T).*ea[sa]
+  bⱼ = one(T).*eb[sb]
+  gramdet = det(aᵢ .⋅ reverse(bⱼ)')
+  scalar(a)*scalar(b)*gramdet
+  ==#
+  aᵢ = ea[sa]
+  bⱼ = eb[sb]
+  :(a.x*b.x*det(one($T).*$aᵢ .⋅ reverse(one($T).*$bⱼ)'))
 end
 
+det( a::A, b::B ) where {T, N, M, A<:Blade{T,N}, B<:Blade{T,M}} = zero(T)
 
 """
     ⋆(k, 𝑖)
