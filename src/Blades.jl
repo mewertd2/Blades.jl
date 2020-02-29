@@ -876,7 +876,7 @@ import LinearAlgebra: norm,norm_sqr,normalize
 
 norm_sqr(b::K) where {K<:Blade} = magnitude(b)*magnitude(b)
 norm(b::K) where {K<:Blade} = abs(magnitude(b))
-normalize(b::K) where {T, K<:Blade{T}} = one(T)∧untype(b)
+normalize(b::K) where {T, K<:Blade{T}} = sign(magnitude(b))*one(T)∧untype(b)
 
 """
     basis_kblades(k, n)

@@ -109,6 +109,8 @@ Base.:(+)(s::T, a::B) where {B<:Blade,T<:Real} = a + s
 
   @test norm(b) == 2.0 == det(b)
   @test norm(normalize(b)) == 1.0
+  @test norm(normalize(-b)) == 1.0
+  @test magnitude(normalize(-b)) == -1.0
   @test Blades.norm_sqr(b) == 4.0 == det(b,b)
   @test conj(a*b) == b*a == reverse(a*b) == ~(a*b)
 
