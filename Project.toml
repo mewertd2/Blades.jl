@@ -1,7 +1,7 @@
 name = "Blades"
 uuid = "ab78ad86-d995-11e9-19c2-2d9731c36d75"
 authors = ["Michael Alexander Ewert <mewert@d2.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
